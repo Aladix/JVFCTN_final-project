@@ -1,17 +1,25 @@
 package sk.best.newtify.api.dto;
 
+import java.net.URI;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.io.Serializable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
+import java.util.*;
 import javax.annotation.Generated;
-import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * Error
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-13T16:30:07.948661900+02:00[Europe/Prague]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-14T11:55:10.235199+02:00[Europe/Skopje]")
 public class Error implements Serializable {
 
   private static final long serialVersionUID = 1L;

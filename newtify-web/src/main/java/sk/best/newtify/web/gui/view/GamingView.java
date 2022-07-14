@@ -9,7 +9,7 @@ import sk.best.newtify.api.ArticlesApi;
 import sk.best.newtify.api.dto.ArticleDTO;
 import sk.best.newtify.api.dto.ETopicType;
 import sk.best.newtify.web.gui.component.article.ArticlePreviewComponent;
-import sk.best.newtify.web.gui.component.widget.NameDayWidgetComponent;
+import sk.best.newtify.web.gui.component.widget.QuoteWidgetComponent;
 import sk.best.newtify.web.gui.layout.MainLayout;
 
 import javax.annotation.PostConstruct;
@@ -29,7 +29,7 @@ public class GamingView extends FlexLayout {
 
     private final ArticlesApi                            articlesApi;
     private final ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory;
-    private final ObjectFactory<NameDayWidgetComponent>  nameDayWidgetComponentObjectFactory;
+    private final ObjectFactory<QuoteWidgetComponent>  quoteWidgetComponentObjectFactory;
 
     private final VerticalLayout middleContent      = new VerticalLayout();
     private final VerticalLayout leftWidgetContent  = new VerticalLayout();
@@ -39,10 +39,10 @@ public class GamingView extends FlexLayout {
 
     public GamingView(ArticlesApi articlesApi,
                       ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory,
-                      ObjectFactory<NameDayWidgetComponent> nameDayWidgetComponentObjectFactory) {
+                      ObjectFactory<QuoteWidgetComponent> nameDayWidgetComponentObjectFactory) {
         this.articlesApi                         = articlesApi;
         this.articlePreviewObjectFactory         = articlePreviewObjectFactory;
-        this.nameDayWidgetComponentObjectFactory = nameDayWidgetComponentObjectFactory;
+        this.quoteWidgetComponentObjectFactory = nameDayWidgetComponentObjectFactory;
     }
 
     @PostConstruct
@@ -81,8 +81,8 @@ public class GamingView extends FlexLayout {
         setFlexShrink(2, leftWidgetContent);
         setFlexGrow(1, leftWidgetContent);
 
-        NameDayWidgetComponent nameDayWidget = nameDayWidgetComponentObjectFactory.getObject();
-        leftWidgetContent.add(nameDayWidget);
+        QuoteWidgetComponent quoteWidget = quoteWidgetComponentObjectFactory.getObject();
+        leftWidgetContent.add(quoteWidget);
     }
 
     private void fetchArticles() {
