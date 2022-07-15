@@ -37,6 +37,7 @@ public class KanyeWidget extends VerticalLayout {
         this.setWidthFull();
     }
 
+    
     private void createIcon(){
         Icon kanyeIcon = VaadinIcon.GAMEPAD.create();
         kanyeIcon.setSize("5em");
