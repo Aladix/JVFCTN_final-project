@@ -34,6 +34,7 @@ public class ArticleService {
                 TopicType.fromValue(createArticleDTO
                         .getTopicType().toString()));
 
+        article.setImageLink(createArticleDTO.getImageLink());
         articleRepository.save(article);
 
         ArticleDTO articleDTO = new ArticleDTO();
@@ -68,6 +69,7 @@ public class ArticleService {
         articleDTO.setTopicType(
                 ETopicType.fromValue(article
                         .getTopicType().toString()));
+        articleDTO.setImageLink(article.getImageLink());
         return articleDTO;
     }
 
@@ -95,6 +97,7 @@ public class ArticleService {
             articleDTO.setTopicType(
                     ETopicType.fromValue(article
                             .getTopicType().toString()));
+            articleDTO.setImageLink(article.getImageLink());
             response.add(articleDTO);
         }
 

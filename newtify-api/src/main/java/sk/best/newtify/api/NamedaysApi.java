@@ -33,7 +33,7 @@ import javax.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-07-14T11:55:10.235199+02:00[Europe/Skopje]")
 @Validated
 @Tag(name = "Namedays", description = "Group of endpoints to handle operations with name day")
-public interface NamedaysApi {
+public interface  NamedaysApi {
 
     /**
      * GET /v1/namedays

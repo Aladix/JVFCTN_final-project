@@ -21,6 +21,7 @@ public interface ArticleMapper {
         createArticleDTO.setText(articleDTO.getText());
         createArticleDTO.setTopicType(articleDTO.getTopicType());
         createArticleDTO.setShortTitle(articleDTO.getShortTitle());
+        createArticleDTO.setImageLink(articleDTO.getImageLink());
         return createArticleDTO;
     }
 
