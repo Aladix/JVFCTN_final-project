@@ -10,6 +10,7 @@ import sk.best.newtify.api.ArticlesApi;
 import sk.best.newtify.api.dto.ArticleDTO;
 import sk.best.newtify.web.gui.component.article.ArticlePreviewComponent;
 import sk.best.newtify.web.gui.component.widget.BitcoinWidgetComponent.TickerWidgetComponent;
+import sk.best.newtify.web.gui.component.widget.DogWidgetComponent;
 import sk.best.newtify.web.gui.component.widget.KanyeWidget;
 import sk.best.newtify.web.gui.component.widget.QuoteWidgetComponent;
 import sk.best.newtify.web.gui.layout.MainLayout;
@@ -35,6 +36,7 @@ public class NewsView extends FlexLayout {
     private final ObjectFactory<QuoteWidgetComponent>  QuoteWidgetComponentFactory;
 
     private final ObjectFactory<TickerWidgetComponent>  TickerWidgetComponentFactory;
+    private final ObjectFactory<DogWidgetComponent> DogWidgetComponentFactory;
     private final ObjectFactory<KanyeWidget> KanyeWidgetFactory;
 
     private final VerticalLayout middleContent      = new VerticalLayout();
@@ -44,11 +46,12 @@ public class NewsView extends FlexLayout {
     private List<ArticleDTO> articles = Collections.emptyList();
 
     public NewsView(ArticlesApi articlesApi,
-                    ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory, ObjectFactory<QuoteWidgetComponent> quoteWidgetComponentFactory, ObjectFactory<TickerWidgetComponent> tickerWidgetComponentFactory, ObjectFactory<KanyeWidget> kanyeWidgetFactory) {
+                    ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory, ObjectFactory<QuoteWidgetComponent> quoteWidgetComponentFactory, ObjectFactory<TickerWidgetComponent> tickerWidgetComponentFactory, ObjectFactory<DogWidgetComponent> dogWidgetComponentFactory, ObjectFactory<KanyeWidget> kanyeWidgetFactory) {
         this.articlesApi                         = articlesApi;
         this.articlePreviewObjectFactory         = articlePreviewObjectFactory;
         QuoteWidgetComponentFactory = quoteWidgetComponentFactory;
         TickerWidgetComponentFactory = tickerWidgetComponentFactory;
+        DogWidgetComponentFactory = dogWidgetComponentFactory;
         KanyeWidgetFactory = kanyeWidgetFactory;
     }
 
@@ -91,7 +94,8 @@ public class NewsView extends FlexLayout {
         QuoteWidgetComponent quoteWidgetComponent = QuoteWidgetComponentFactory.getObject();
         TickerWidgetComponent tickerWidgetComponent = TickerWidgetComponentFactory.getObject();
         KanyeWidget kanyeWidget = KanyeWidgetFactory.getObject();
-        leftWidgetContent.add(quoteWidgetComponent, tickerWidgetComponent,kanyeWidget);
+        DogWidgetComponent dogWidgetComponent = DogWidgetComponentFactory.getObject();
+        leftWidgetContent.add(quoteWidgetComponent, tickerWidgetComponent,kanyeWidget, dogWidgetComponent   );
     }
 
     private void fetchArticles() {
