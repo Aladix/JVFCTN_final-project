@@ -9,6 +9,8 @@ import org.springframework.beans.factory.ObjectFactory;
 import sk.best.newtify.api.ArticlesApi;
 import sk.best.newtify.api.dto.ArticleDTO;
 import sk.best.newtify.web.gui.component.article.ArticlePreviewComponent;
+import sk.best.newtify.web.gui.component.widget.BitcoinWidgetComponent.TickerWidgetComponent;
+import sk.best.newtify.web.gui.component.widget.KanyeWidget;
 import sk.best.newtify.web.gui.component.widget.QuoteWidgetComponent;
 import sk.best.newtify.web.gui.layout.MainLayout;
 
@@ -32,6 +34,9 @@ public class NewsView extends FlexLayout {
     private final ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory;
     private final ObjectFactory<QuoteWidgetComponent>  QuoteWidgetComponentFactory;
 
+    private final ObjectFactory<TickerWidgetComponent>  TickerWidgetComponentFactory;
+    private final ObjectFactory<KanyeWidget> KanyeWidgetFactory;
+
     private final VerticalLayout middleContent      = new VerticalLayout();
     private final VerticalLayout leftWidgetContent  = new VerticalLayout();
     private final VerticalLayout rightWidgetContent = new VerticalLayout();
@@ -39,10 +44,12 @@ public class NewsView extends FlexLayout {
     private List<ArticleDTO> articles = Collections.emptyList();
 
     public NewsView(ArticlesApi articlesApi,
-                    ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory, ObjectFactory<QuoteWidgetComponent> quoteWidgetComponentFactory) {
+                    ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory, ObjectFactory<QuoteWidgetComponent> quoteWidgetComponentFactory, ObjectFactory<TickerWidgetComponent> tickerWidgetComponentFactory, ObjectFactory<KanyeWidget> kanyeWidgetFactory) {
         this.articlesApi                         = articlesApi;
         this.articlePreviewObjectFactory         = articlePreviewObjectFactory;
         QuoteWidgetComponentFactory = quoteWidgetComponentFactory;
+        TickerWidgetComponentFactory = tickerWidgetComponentFactory;
+        KanyeWidgetFactory = kanyeWidgetFactory;
     }
 
     @PostConstruct
@@ -82,7 +89,9 @@ public class NewsView extends FlexLayout {
         setFlexGrow(1, leftWidgetContent);
 
         QuoteWidgetComponent quoteWidgetComponent = QuoteWidgetComponentFactory.getObject();
-        leftWidgetContent.add(quoteWidgetComponent);
+        TickerWidgetComponent tickerWidgetComponent = TickerWidgetComponentFactory.getObject();
+        KanyeWidget kanyeWidget = KanyeWidgetFactory.getObject();
+        leftWidgetContent.add(quoteWidgetComponent, tickerWidgetComponent,kanyeWidget);
     }
 
     private void fetchArticles() {

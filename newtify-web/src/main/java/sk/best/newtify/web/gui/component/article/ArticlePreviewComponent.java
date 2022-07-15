@@ -12,6 +12,7 @@ import com.vaadin.flow.dom.DomEvent;
 import com.vaadin.flow.server.StreamResource;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +23,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 /**
  * @author Marek Urban
@@ -42,6 +44,9 @@ public class ArticlePreviewComponent extends Composite<VerticalLayout> {
     private final H5    previewText = new H5();
 
     private ArticleDTO article;
+    private final static Logger logger =
+            Logger.getLogger("images");
+
     private byte[]     imageData;
 
     public ArticlePreviewComponent() {
@@ -93,7 +98,11 @@ public class ArticlePreviewComponent extends Composite<VerticalLayout> {
 
     private byte[] fetchImage() {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject("https://picsum.photos/500/250", byte[].class);
+        if(this.article.getImageLink()==null){
+            this.article.setImageLink("https://upload.wikimedia.org/wikipedia/commons/b/b1/Missing-image-232x150.png");
+        }
+        ResponseEntity<byte[]> forEntity = restTemplate.getForEntity(this.article.getImageLink(), byte[].class);
+        return forEntity.getBody();
     }
 
     private void clear() {

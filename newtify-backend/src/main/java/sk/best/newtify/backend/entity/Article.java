@@ -13,6 +13,7 @@ public class Article {
 
     private String title;
 
+    private String imageLink;
     private String shortTitle;
 
     @Lob
@@ -29,6 +30,8 @@ public class Article {
         return uuid;
     }
 
+    public String getImageLink(){ return imageLink;}
+    public void setImageLink(String link){this.imageLink=link;}
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }

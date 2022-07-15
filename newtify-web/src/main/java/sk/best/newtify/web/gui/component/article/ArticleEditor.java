@@ -43,6 +43,7 @@ public class ArticleEditor extends VerticalLayout {
     private final TextField          authorField     = new TextField();
     private final Select<ETopicType> topicSelector   = new Select<>(ETopicType.values());
     private final TextArea           contentTextArea = new TextArea();
+    private final TextArea imageLink = new TextArea();
     private final Binder<ArticleDTO> articleBinder   = new Binder<>();
 
     public ArticleEditor(ArticlesApi articlesApi) {
@@ -53,7 +54,7 @@ public class ArticleEditor extends VerticalLayout {
         authorField.setSizeFull();
         topicSelector.setSizeFull();
         contentTextArea.setSizeFull();
-
+        imageLink.setSizeFull();
         confirmDialog.setHeader("Create new article");
         confirmDialog.setHeight("600px");
     }
@@ -66,6 +67,7 @@ public class ArticleEditor extends VerticalLayout {
         formLayout.addFormItem(shortTitleField, "Short intro");
         formLayout.addFormItem(authorField, "Author");
         formLayout.addFormItem(topicSelector, "Topic");
+        formLayout.addFormItem(imageLink, "Image link");
 
         contentTextArea.setLabel("Content");
         formLayout.add(contentTextArea);
@@ -152,6 +154,16 @@ public class ArticleEditor extends VerticalLayout {
                     return ValidationResult.ok();
                 })
                 .bind(ArticleDTO::getText, ArticleDTO::setText);
+
+        articleBinder
+                .forField(imageLink)
+                .withValidator((value, context) -> {
+                    if (StringUtils.isBlank(value)) {
+                        return ValidationResult.error("Image link is missing!");
+                    }
+                    return ValidationResult.ok();
+                })
+                .bind(ArticleDTO::getImageLink, ArticleDTO::setImageLink);
 
         articleBinder.addValueChangeListener(event -> articleBinder.validate());
     }

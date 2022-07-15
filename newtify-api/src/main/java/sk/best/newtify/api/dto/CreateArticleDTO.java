@@ -42,7 +42,11 @@ public class CreateArticleDTO implements Serializable {
 
   @JsonProperty("topicType")
   private ETopicType topicType;
+  @JsonProperty("imageLink")
+  private String imageLink;
 
+  public String getImageLink(){return imageLink;}
+  public void setImageLink(String a){this.imageLink=a;}
   public CreateArticleDTO title(String title) {
     this.title = title;
     return this;

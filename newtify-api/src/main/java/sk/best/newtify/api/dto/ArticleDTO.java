@@ -45,6 +45,17 @@ public class ArticleDTO implements Serializable {
 
   @JsonProperty("topicType")
   private ETopicType topicType;
+  
+  @JsonProperty("imageLink")
+  private String imageLink;
+
+  public void setImageLink(String imageLink) {
+    this.imageLink = imageLink;
+  }
+
+  public String getImageLink() {
+    return imageLink;
+  }
 
   public ArticleDTO uuid(String uuid) {
     this.uuid = uuid;
